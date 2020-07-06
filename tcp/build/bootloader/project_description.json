@@ -1,0 +1,18 @@
+{
+    "project_name":       "bootloader",
+    "project_path":       "C:/Users/16339/Downloads/esp-idf-v3.3.1/components/bootloader/subproject",
+    "build_dir":          "C:/Users/16339/Downloads/esp-idf-v3.3.1/tcp/build/bootloader",
+    "config_file":        "C:/Users/16339/Downloads/esp-idf-v3.3.1/tcp/sdkconfig",
+    "config_defaults":    "",
+    "app_elf":            "bootloader.elf",
+    "app_bin":            "bootloader.bin",
+    "git_revision":       "v3.3.1",
+    "phy_data_partition": "",
+    "monitor_baud" : "115200",
+    "config_environment" : {
+        "COMPONENT_KCONFIGS" : " C:/Users/16339/Downloads/esp-idf-v3.3.1/components/efuse/Kconfig C:/Users/16339/Downloads/esp-idf-v3.3.1/components/esp32/Kconfig C:/Users/16339/Downloads/esp-idf-v3.3.1/components/log/Kconfig C:/Users/16339/Downloads/esp-idf-v3.3.1/components/spi_flash/Kconfig",
+        "COMPONENT_KCONFIGS_PROJBUILD" : " C:/Users/16339/Downloads/esp-idf-v3.3.1/components/bootloader/Kconfig.projbuild C:/Users/16339/Downloads/esp-idf-v3.3.1/components/esptool_py/Kconfig.projbuild C:/Users/16339/Downloads/esp-idf-v3.3.1/components/partition_table/Kconfig.projbuild"
+    },
+    "build_components" : [ "soc", "esp32", "log", "bootloader", "spi_flash", "micro-ecc", "efuse", "bootloader_support", "main", "esptool_py", "partition_table" ],
+    "build_component_paths" : [ "C:/Users/16339/Downloads/esp-idf-v3.3.1/components/soc", "C:/Users/16339/Downloads/esp-idf-v3.3.1/components/esp32", "C:/Users/16339/Downloads/esp-idf-v3.3.1/components/log", "C:/Users/16339/Downloads/esp-idf-v3.3.1/components/bootloader", "C:/Users/16339/Downloads/esp-idf-v3.3.1/components/spi_flash", "C:/Users/16339/Downloads/esp-idf-v3.3.1/components/micro-ecc", "C:/Users/16339/Downloads/esp-idf-v3.3.1/components/efuse", "C:/Users/16339/Downloads/esp-idf-v3.3.1/components/bootloader_support", "C:/Users/16339/Downloads/esp-idf-v3.3.1/components/bootloader/subproject/main", "C:/Users/16339/Downloads/esp-idf-v3.3.1/components/esptool_py", "C:/Users/16339/Downloads/esp-idf-v3.3.1/components/partition_table" ]
+}
