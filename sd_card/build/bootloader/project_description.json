@@ -1,0 +1,18 @@
+{
+    "project_name":       "bootloader",
+    "project_path":       "D:/Desktop/esp-idf/components/bootloader/subproject",
+    "build_dir":          "D:/Desktop/esp-idf/examples/storage/sd_card/build/bootloader",
+    "config_file":        "D:/Desktop/esp-idf/examples/storage/sd_card/sdkconfig",
+    "config_defaults":    "",
+    "app_elf":            "bootloader.elf",
+    "app_bin":            "bootloader.bin",
+    "git_revision":       "v4.0.1-dirty",
+    "phy_data_partition": "",
+    "monitor_baud" : "115200",
+    "config_environment" : {
+        "COMPONENT_KCONFIGS" : "D:/Desktop/esp-idf/components/efuse/Kconfig;D:/Desktop/esp-idf/components/esp32/Kconfig;D:/Desktop/esp-idf/components/esp_common/Kconfig;D:/Desktop/esp-idf/components/log/Kconfig;D:/Desktop/esp-idf/components/spi_flash/Kconfig",
+        "COMPONENT_KCONFIGS_PROJBUILD" : "D:/Desktop/esp-idf/components/bootloader/Kconfig.projbuild;D:/Desktop/esp-idf/components/esptool_py/Kconfig.projbuild;D:/Desktop/esp-idf/components/partition_table/Kconfig.projbuild"
+    },
+    "build_components" : [ "bootloader", "bootloader_support", "efuse", "esp32", "esp_common", "esp_rom", "esptool_py", "log", "main", "micro-ecc", "partition_table", "soc", "spi_flash", "xtensa", "" ],
+    "build_component_paths" : [ "D:/Desktop/esp-idf/components/bootloader", "D:/Desktop/esp-idf/components/bootloader_support", "D:/Desktop/esp-idf/components/efuse", "D:/Desktop/esp-idf/components/esp32", "D:/Desktop/esp-idf/components/esp_common", "D:/Desktop/esp-idf/components/esp_rom", "D:/Desktop/esp-idf/components/esptool_py", "D:/Desktop/esp-idf/components/log", "D:/Desktop/esp-idf/components/bootloader/subproject/main", "D:/Desktop/esp-idf/components/bootloader/subproject/components/micro-ecc", "D:/Desktop/esp-idf/components/partition_table", "D:/Desktop/esp-idf/components/soc", "D:/Desktop/esp-idf/components/spi_flash", "D:/Desktop/esp-idf/components/xtensa", "" ]
+}
