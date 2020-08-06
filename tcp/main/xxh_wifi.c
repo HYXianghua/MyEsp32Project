@@ -40,7 +40,7 @@ static esp_err_t xWifiEventHandler(void *ctx, system_event_t *event)
   return ESP_OK;
 }
 
-void vWifiInit(void)
+void vDriveWifiInit(void)
 {
   tcpip_adapter_init();
   //创建wifi事件

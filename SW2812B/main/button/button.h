@@ -59,22 +59,16 @@ typedef struct button
 {
   /* 下面是一个函数指针，指向判断按键手否按下的函数 */
   // uint8_t (*Read_Button_Level)(void); /* 读取按键电平函数，需要用户实现 */
-
   char Name[BTN_NAME_MAX];
-
   uint8_t Button_State : 4;         /* 按键当前状态（按下还是弹起） */
   uint8_t Button_Last_State : 4;    /* 上一次的按键状态，用于判断双击 */
   uint8_t Button_Trigger_Level : 2; /* 按键触发电平 */
   uint8_t Button_Last_Level : 2;    /* 按键当前电平 */
-
-  uint8_t Button_Trigger_Event; /* 按键触发事件，单击，双击，长按等 */
-
-  uint8_t Button_Cycle; /* 连续按键周期 */
-
-  uint8_t Timer_Count;   /* 计时 */
-  uint8_t Debounce_Time; /* 消抖时间 */
-
-  uint8_t Long_Time; /* 按键按下持续时间 */
+  uint8_t Button_Trigger_Event;     /* 按键触发事件，单击，双击，长按等 */
+  uint8_t Button_Cycle;             /* 连续按键周期 */
+  uint8_t Timer_Count;              /* 计时 */
+  uint8_t Debounce_Time;            /* 消抖时间 */
+  uint8_t Long_Time;                /* 按键按下持续时间 */
   Button_CallBack CallBack_Function[number_of_event];
   uint8_t Pin;
   struct button *Next;
@@ -97,5 +91,5 @@ void Get_Button_EventInfo(Button_t *btn);
 uint8_t Get_Button_Event(Button_t *btn);
 uint8_t Get_Button_State(Button_t *btn);
 void Button_Process_CallBack(void *btn);
-void but_init(void);
+void vDriveButtonInit(void);
 #endif

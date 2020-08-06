@@ -8,5 +8,5 @@
 #define MYWIFI_SSID "泰溢家私"
 #define MYWIFI_PASS "13411111358"
 #endif
-void vWifiInit(void);
+void vDriveWifiInit(void);
 #endif

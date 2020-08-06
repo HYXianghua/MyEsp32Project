@@ -11,6 +11,7 @@
 #include "esp_log.h"
 #include "esp_event_loop.h"
 #include "esp_sntp.h"
+#include "nvs_flash.h"
 
 #include "xxh_wifi.h"
 
@@ -43,7 +44,7 @@ void vWifiInitSntp(void)
 {
   ESP_LOGI(TAG, "------------Initializing SNTP");
   sntp_setoperatingmode(SNTP_OPMODE_POLL);
-  sntp_setservername(0, "cn.ntp.org.cn"); //设置访问服务器	中国提供商
+  sntp_setservername(0, "ntp.aliyun.com"); //设置访问服务器	中国提供商
   sntp_init();
   setenv("TZ", "CST-8", 1);
   tzset();
@@ -60,8 +61,9 @@ struct tm tmMainGetNowTime(void)
   return timeinfo;
 }
 
-void vWifiInit(void)
+void vDriveWifiInit(void)
 {
+  nvs_flash_init();
   tcpip_adapter_init();
   //创建wifi事件
   wifi_event_group = xEventGroupCreate();
@@ -77,7 +79,6 @@ void vWifiInit(void)
           },
   };
   ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
-
   ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_STA, &wifi_config));
   ESP_LOGI(TAG, "start the WIFI SSID:[%s]", MYWIFI_SSID);
   ESP_ERROR_CHECK(esp_wifi_start());

@@ -6,8 +6,13 @@
 #include "screen_drive/screen_drive.h"
 #include "wifi/xxh_wifi.h"
 #include "mqtt/xxh_mqtt.h"
-#include "driver/mcpwm.h"
+#include "tf/tf.h"
+#include "LZ77/LZ77.H"
+#include "playmv/playmv.H"
 
 void vShowTaskList(void);
 void vButtonInit(void);
+float getCellVoltage(void);
+void vAdcInit(void);
+void test_led(void);
 #endif

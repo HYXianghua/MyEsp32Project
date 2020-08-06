@@ -261,7 +261,7 @@ static void Button_Process(void *arg)
   struct button *pass_btn = NULL;
   while (1)
   {
-    vTaskDelay(50 / portTICK_RATE_MS);
+    vTaskDelay(50);
     for (pass_btn = Head_Button; pass_btn != NULL; pass_btn = pass_btn->Next)
     {
       Button_Cycle_Process(pass_btn);
@@ -323,7 +323,7 @@ static void Add_Button(Button_t *btn)
   Head_Button = btn;
 }
 
-void but_init(void)
+void vDriveButtonInit(void)
 {
-  xTaskCreate(Button_Process, "button_task", 2048, NULL, 10, NULL);
+  xTaskCreatePinnedToCore(Button_Process, "button_task", 1024, NULL, 10, NULL, 1);
 }

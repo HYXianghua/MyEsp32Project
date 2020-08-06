@@ -3,8 +3,8 @@
 #include <stdint.h>
 
 // 初始化相关设备
-void sk9822_drive_init(void);
+void vDriveSk9822Init(void);
 
-void sk9822_sand_data(const uint32_t *data, int len);
-
+void sk9822_sand_data(const uint32_t *pData);
+void sk9822_sand_data_len(const uint32_t *data, int dev, int len);
 #endif

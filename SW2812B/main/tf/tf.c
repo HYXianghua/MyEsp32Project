@@ -1,9 +1,24 @@
-/* SD card and FAT filesystem example.
-   This example code is in the Public Domain (or CC0 licensed, at your option.)
+#include <stdio.h>
+#include <string.h>
+#include <sys/unistd.h>
+#include <sys/stat.h>
+#include "esp_err.h"
+#include "esp_log.h"
+#include "esp_vfs_fat.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/sdmmc_host.h"
+#include "sdmmc_cmd.h"
 
-   Unless required by applicable law or agreed to in writing, this
-   software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-   CONDITIONS OF ANY KIND, either express or implied.
+#include "tf.h"
+static const char *TAG = "[FAT]";
+
+/* SD card and FAT filesystem example. 
+   This example code is in the Public Domain (or CC0 licensed, at your option.) 
+ 
+   Unless required by applicable law or agreed to in writing, this 
+   software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
+   CONDITIONS OF ANY KIND, either express or implied. 
 */
 
 #include <stdio.h>
@@ -30,17 +45,13 @@ void vTfInit(void)
   gpio_config(&io_conf);
   gpio_set_level(32, 0);
   ESP_LOGI(TAG, "TF Power ON");
-
-  vTaskDelay(100 / portTICK_RATE_MS);
-
-  ESP_LOGI(TAG, "Using SDMMC peripheral");
+  vTaskDelay(50);
   sdmmc_host_t host = SDMMC_HOST_DEFAULT();
   //初始化没有卡检测(CD)和写保护(WP)信号的插槽。
   sdmmc_slot_config_t slot_config = SDMMC_SLOT_CONFIG_DEFAULT();
   //安装文件系统的选项。
-  //如果format_if_mount_failed设置为true, SD卡将格式化
   esp_vfs_fat_sdmmc_mount_config_t mount_config = {
-      .format_if_mount_failed = false,
+      .format_if_mount_failed = false, //禁止格式化
       .max_files = 5,
       .allocation_unit_size = 16 * 1024};
   //使用上面定义的设置初始化SD卡和挂载FAT文件系统。
@@ -60,15 +71,11 @@ void vTfInit(void)
     }
     return;
   }
-
-  // Card has been initialized, print its properties
-  //SD已初始化，打印其属性
   sdmmc_card_print_info(stdout, card);
 }
+
 void vTFExample(void)
 {
-  // Use POSIX and C standard library functions to work with files.
-  // First create a file.
   //使用POSIX和C标准库函数处理文件。
   //首先创建一个文件。
   ESP_LOGI(TAG, "Opening file");
@@ -122,4 +129,30 @@ void vTFExample(void)
   //全部完成，卸载分区并禁用SDMMC或SPI外围设备
   esp_vfs_fat_sdmmc_unmount();
   ESP_LOGI(TAG, "Card unmounted");
+}
+
+void getAllFileName(char *data)
+{
+  FRESULT fr;  /* Return value */
+  FF_DIR dj;   /* Di    ctory object */
+  FILINFO fno; /* File information */
+  uint16_t j = 0;
+  fr = f_findfirst(&dj, &fno, "", "*"); /* Start to search for phot    files */
+  if (fr != FR_OK)
+  {
+    j += sprintf(data, "is no file\n");
+  }
+  else
+  {
+    j += sprintf(data, "file list is:\n");
+  }
+
+  fr = f_findnext(&dj, &fno);
+  while (fr == FR_OK && fno.fname[0])
+  {
+    ESP_LOGI(TAG, "%n", fno.fname);
+    j += sprintf(data + j, "%s\n", fno.fname);
+    j += f_findnext(&dj, &fno);
+    f_closedir(&dj);
+  }
 }

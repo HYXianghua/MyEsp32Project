@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdint.h>
 #include "clock.h"
+#include <time.h>
 
 const uint8_t strnum[] = {
     0xFE, 0x82, 0x82, 0xFE, //0
@@ -15,8 +16,7 @@ const uint8_t strnum[] = {
     0xFE, 0x92, 0x92, 0xFE, //8
     0x1E, 0x12, 0x12, 0xFE, //9
 };
-
-void vClockInit(frame_type *pDisplayBuff)
+static void prepareClockData(frame_type *pDisplayBuff)
 {
   ScreenLRGBUnion BUFF = {0};
   //复制亮度
@@ -78,12 +78,17 @@ void vClockInit(frame_type *pDisplayBuff)
   }
 }
 
-void vClockUpData(frame_type *p, uint16_t H, uint16_t M, uint16_t S)
+void vClockUpData(frame_type *p)
 {
+  time_t now = 0;
+  struct tm t = {0};
+  time(&now);            //获取网络时间， 64bit的秒计数
+  localtime_r(&now, &t); //转换成具体的时间参数
+
   static uint16_t oldH[2], oldM[2], oldS[2];
   static uint16_t pf;
-  H %= 12; //24化12小时制
-  uint16_t angS = S * 16 / 5, angM = M * 16 / 5 + angS / 60, angH = H * 16 + angM / 60;
+  t.tm_hour %= 12; //24化12小时制
+  uint16_t angS = t.tm_sec * 16 / 5, angM = t.tm_min * 16 / 5 + angS / 60, angH = t.tm_hour * 16 + angM / 60;
   angS = (angS + 8) % LINE_NUMBER;
   angS = (angM + 8) % LINE_NUMBER;
   angS = (angH + 8) % LINE_NUMBER;
@@ -130,4 +135,11 @@ void vClockUpData(frame_type *p, uint16_t H, uint16_t M, uint16_t S)
   {
     (*p)[angS][i] |= BUFF.DATA;
   }
+}
+
+void vClockInit(frame_type buff[2])
+{
+  prepareClockData(buff[1]);
+  prepareClockData(buff[0]);
+  RegisterPlayer(vClockUpData);
 }

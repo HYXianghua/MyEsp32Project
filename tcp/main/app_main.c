@@ -61,7 +61,7 @@ void app_main()
   nvs_flash_init();
   //vVfdTaskInit();
   vVfdWifiLinking();
-  vWifiInit();
+  vDriveWifiInit();
   vNowInit();
   //vMqttAppStart();
   //vMainInitSntp();

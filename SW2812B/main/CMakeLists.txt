@@ -8,4 +8,8 @@ idf_component_register(SRCS
                     "screen_drive/screen_drive.c"
                     "wifi/xxh_wifi.c"
                     "mqtt/xxh_mqtt.c"
+                    "tf/tf.c"
+                    "LZ77/LZ77.C"
+                    "playMv/playMv.c"
+                    "adc_drive.c"
                     INCLUDE_DIRS ".")
